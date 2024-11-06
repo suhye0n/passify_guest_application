@@ -1,0 +1,46 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <div class="auth-header">
+      <h1>{{ title }}</h1>
+    </div>
+    <form [formGroup]="authForm" class="auth-form" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="이메일을 입력하세요"
+          [class.invalid]="authForm.get('email')?.invalid && authForm.get('email')?.touched"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="비밀번호를 입력하세요"
+          [class.invalid]="authForm.get('password')?.invalid && authForm.get('password')?.touched"
+        />
+      </div>
+      
+      <!-- 오류 메시지 -->
+      <div class="error-message" *ngIf="errors && errors.detail">
+        <ul>
+          <li *ngFor="let entry of errorEntries">
+            <strong>{{ entry[0] }}:</strong> {{ entry[1] }}
+          </li>
+        </ul>
+      </div>
+      
+      <button type="submit" [disabled]="isSubmitting || authForm.invalid">
+        {{ authType === 'login' ? '로그인' : '회원가입' }}
+      </button>
+    </form>
+
+    <div class="link">
+      <a [routerLink]="authType === 'login' ? '/signup' : '/login'">
+        {{ authType === 'login' ? '계정이 없으신가요? 회원가입' : '이미 계정이 있으신가요? 로그인' }}
+      </a>
+    </div>
+  </div>
+</div>

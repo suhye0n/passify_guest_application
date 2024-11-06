@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="logo">
+    <a href="/" class="title">
+      Pointify
+    </a>
+  </div>
+  <nav class="navbar">
+    <ul>
+      <li><a href="/coupons">쿠폰</a></li>
+      <li><a href="/cards">카드</a></li>
+    </ul>
+  </nav>
+  <div class="auth-buttons">
+    <ng-container *ifAuthenticated="false">
+      <a href="/login" class="btn">로그인</a>
+      <a href="/signup" class="btn">회원가입</a>
+    </ng-container>
+
+    <ng-container *ifAuthenticated="true">
+      <span>{{ (currentUser$ | async)?.email }}</span>
+      <a class="btn" (click)="logout()">로그아웃</a>
+    </ng-container>
+  </div>
+</header>

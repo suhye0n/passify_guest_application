@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from './core/layout/header.component';
 import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from './core/layout/footer.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [HeaderComponent, RouterOutlet, FooterComponent],
 })
-export class AppComponent {
-  title = 'pointify';
-}
+export class AppComponent {}
