@@ -22,4 +22,12 @@ export const routes: Routes = [
       () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
     ],
   },
+  {
+    path: 'coupons',
+    loadComponent: () => import('./modules/coupon/list/coupon.component'),
+  },
+  // {
+  //   path: 'coupons/:id',
+  //   loadComponent: () => import('./modules/coupon/detail/coupon.component'),
+  // },
 ];

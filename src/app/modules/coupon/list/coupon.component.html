@@ -1,0 +1,13 @@
+<div class="coupon-container">
+  <h1>쿠폰</h1>
+  <div *ngIf="coupons.length > 0">
+    <ul class="coupon-list">
+      <li *ngFor="let coupon of coupons" (click)="goToDetail(coupon.id)">
+        {{ coupon.name }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="coupons.length === 0">
+    <p>쿠폰이 없습니다.</p>
+  </div>
+</div>
