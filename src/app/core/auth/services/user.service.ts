@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, tap, distinctUntilChanged, shareReplay } from 'rxjs/operators';
+import {
+  map,
+  tap,
+  distinctUntilChanged,
+  shareReplay,
+  concatMap,
+} from 'rxjs/operators';
 import { JwtService } from './jwt.service';
 import { User } from '../user.model';
 import { Router } from '@angular/router';
@@ -31,9 +37,14 @@ export class UserService {
   }
 
   signup(credentials: { email: string; password: string }): Observable<any> {
-    return this.http
-      .post<any>('/signup', credentials)
-      .pipe(tap((response) => this.setAuth(response.data)));
+    return this.http.post<any>('/signup', credentials).pipe(
+      concatMap((response) => {
+        return this.login({
+          email: credentials.email,
+          password: credentials.password,
+        });
+      })
+    );
   }
 
   logout(): void {
