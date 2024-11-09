@@ -19,4 +19,24 @@ export class HeaderComponent {
     this.userService.logout();
     this.router.navigate(['/login']);
   }
+
+  goToSignup(): void {
+    this.router.navigate(['/signup']);
+  }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  goToCoupon(): void {
+    this.router.navigate(['/coupons']);
+  }
+
+  goToCard(): void {
+    this.router.navigate(['/cards']);
+  }
+
+  goToHome(): void {
+    this.router.navigate(['/']);
+  }
 }

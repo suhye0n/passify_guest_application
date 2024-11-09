@@ -28,8 +28,4 @@ export default class HomeComponent implements OnInit {
         this.isAuthenticated = isAuthenticated;
       });
   }
-
-  goToSignup(): void {
-    this.router.navigate(['/signup']);
-  }
 }

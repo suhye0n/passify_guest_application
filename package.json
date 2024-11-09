@@ -10,7 +10,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --configuration=production --base-href=https://suhye0n.github.io/pointify_guest_application/ && ngh --dir=dist/pointify/browser"
+    "deploy": "ng build --configuration=production --base-href=/pointify_guest_application/ && ngh --dir=dist/pointify/browser"
   },
   "private": true,
   "dependencies": {

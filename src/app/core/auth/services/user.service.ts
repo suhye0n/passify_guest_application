@@ -52,11 +52,11 @@ export class UserService {
       .post('/logout', {})
       .pipe(
         tap(() => {
-          this.purgeAuth();
           this.router.navigate(['/login']);
         })
       )
       .subscribe();
+    this.purgeAuth();
   }
 
   getCurrentUser(): Observable<{ user: User }> {
