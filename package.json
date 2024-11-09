@@ -1,6 +1,9 @@
 {
   "name": "pointify",
   "version": "0.0.0",
+  "author": "suhye0n",
+  "description": "Pointify Guest Service",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
