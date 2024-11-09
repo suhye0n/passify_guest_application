@@ -1,9 +1,9 @@
 <div class="coupon-detail-container">
   <h1>쿠폰 상세 정보</h1>
   <div *ngIf="coupon">
+    <p (click)="goToEditPage()">수정</p>
     <p><strong>이름:</strong> {{ coupon.name }}</p>
     <p><strong>바코드:</strong></p>
-    <!-- Barcode canvas element -->
     <svg #barcode></svg>
     <p><strong>메모:</strong> {{ coupon.memo }}</p>
     <p><strong>생성일:</strong> {{ coupon.createdAt | date: 'yyyy-MM-dd' }}</p>

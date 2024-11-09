@@ -6,7 +6,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CouponDetailService } from './coupon-detail.service';
 import JsBarcode from 'jsbarcode';
 import { CommonModule } from '@angular/common';
@@ -27,6 +27,7 @@ export default class CouponDetailComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private couponDetailService: CouponDetailService,
+    private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -62,5 +63,9 @@ export default class CouponDetailComponent implements OnInit, AfterViewInit {
         displayValue: true,
       });
     }
+  }
+
+  goToEditPage(): void {
+    this.router.navigate([`/coupons/edit/${this.coupon.id}`]);
   }
 }
