@@ -23,6 +23,10 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'coupons/add',
+    loadComponent: () => import('./modules/coupon-add/coupon-add.component'),
+  },
+  {
     path: 'coupons/:id',
     loadComponent: () =>
       import('./modules/coupon-detail/coupon-detail.component'),

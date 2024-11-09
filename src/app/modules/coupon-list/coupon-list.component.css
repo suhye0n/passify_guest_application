@@ -2,15 +2,40 @@
     width: 90%;
     max-width: 1500px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
 
 .coupon-list-container h1 {
     font-size: 26px;
     color: #333;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.add-coupon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff9aa7;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.add-coupon-btn i {
+    margin-right: 8px;
+}
+
+.add-coupon-btn:hover {
+    background-color: #ff7b8d;
+    transform: scale(1.05);
 }
 
 .coupon-list {

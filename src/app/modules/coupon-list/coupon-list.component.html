@@ -1,5 +1,8 @@
 <div class="coupon-list-container">
   <h1>쿠폰</h1>
+  <button class="add-coupon-btn" (click)="goToAddCoupon()">
+    <i class="fas fa-plus"></i> 쿠폰 추가
+  </button>
   <div *ngIf="coupons.length > 0">
     <ul class="coupon-list">
       <li *ngFor="let coupon of coupons" (click)="goToDetail(coupon.id)">

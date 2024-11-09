@@ -43,4 +43,8 @@ export default class CouponListComponent implements OnInit {
   goToDetail(couponId: number): void {
     this.router.navigate([`/coupons`, couponId]);
   }
+
+  goToAddCoupon(): void {
+    this.router.navigate(['/coupons/add']);
+  }
 }
