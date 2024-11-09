@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/pointify_guest_application/",
             "outputPath": "dist/pointify",
             "index": "src/index.html",
             "browser": "src/main.ts",
