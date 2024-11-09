@@ -1,19 +1,24 @@
 import { Component, inject } from '@angular/core';
-import { UserService } from '../auth/services/user.service';
-import { AuthenticatedDirective } from '../auth/authenticated.directive';
+import { UserService } from '../../auth/services/user.service';
+import { AuthenticatedDirective } from '../../auth/authenticated.directive';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  imports: [AuthenticatedDirective, AsyncPipe],
+  styleUrls: ['./header.component.css'],
+  imports: [AuthenticatedDirective, AsyncPipe, CommonModule],
   standalone: true,
 })
 export class HeaderComponent {
   currentUser$ = inject(UserService).currentUser$;
   private userService = inject(UserService);
   private router = inject(Router);
+
+  isSidebarActive = false;
+  menuClass = 'close';
 
   logout(): void {
     this.userService.logout();
@@ -38,5 +43,10 @@ export class HeaderComponent {
 
   goToHome(): void {
     this.router.navigate(['/']);
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarActive = !this.isSidebarActive;
+    this.menuClass = this.isSidebarActive ? 'open' : '';
   }
 }

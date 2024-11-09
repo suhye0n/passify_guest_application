@@ -1,11 +1,5 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f7fa;
-    margin: 0;
-    padding: 0;
-}
-
 .coupon-edit-container {
+    width: 80%;
     max-width: 600px;
     margin: 50px auto;
     padding: 30px;
@@ -19,23 +13,20 @@ body {
     transform: scale(1.02);
 }
 
-h1 {
-    text-align: center;
-    font-size: 2.2rem;
+.coupon-edit-container h1 {
+    font-size: 24px;
     color: #333;
+    text-align: center;
     margin-bottom: 20px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
 }
 
-form {
+.coupon-edit-container form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-label {
-    font-size: 1.1rem;
+.coupon-edit-container label {
     color: #555;
     font-weight: 600;
 }
@@ -95,17 +86,10 @@ textarea {
 }
 
 .coupon-edit-container svg {
-    margin-top: 20px;
+    margin-top: 10px;
     display: block;
-    width: 100%;
-    max-width: 250px;
-    height: auto;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: #fafafa;
 }
 
 .coupon-edit-container svg path {

@@ -1,0 +1,35 @@
+<header class="header">
+  <div class="logo">
+    <a (click)="goToHome()" class="title">Pointify</a>
+  </div>
+
+  <!-- 메뉴 버튼 -->
+  <div class="menu-toggle" (click)="toggleSidebar()" [ngClass]="{'open': menuClass === 'open'}">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+<!-- 사이드바 -->
+<div class="sidebar" [ngClass]="{ 'active': isSidebarActive }">
+  <ul>
+    <li><a (click)="goToHome()">홈</a></li>
+
+    <ng-container *ifAuthenticated="true">
+      <li><a (click)="goToCoupon()">쿠폰</a></li>
+      <li><a (click)="goToCard()">카드</a></li>
+    </ng-container>
+  </ul>
+
+  <ul>
+    <ng-container *ifAuthenticated="false">
+      <li><a (click)="goToLogin()">로그인</a></li>
+      <li><a (click)="goToSignup()">회원가입</a></li>
+    </ng-container>
+
+    <ng-container *ifAuthenticated="true">
+      <li><a (click)="logout()">로그아웃</a></li>
+    </ng-container>
+  </ul>
+</div>
