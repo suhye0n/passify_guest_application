@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class CouponService {
+export class CouponDetailService {
   constructor(private http: HttpClient) {}
 
-  getCoupons(): Observable<any> {
-    return this.http.get('/coupons');
+  getCouponById(id: number): Observable<any> {
+    return this.http.get(`/coupons/${id}`);
   }
 }

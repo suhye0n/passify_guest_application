@@ -1,4 +1,4 @@
-.coupon-container {
+.coupon-list-container {
     width: 90%;
     max-width: 1500px;
     margin: 0 auto;
@@ -6,7 +6,7 @@
     font-family: Arial, sans-serif;
 }
 
-.coupon-container h1 {
+.coupon-list-container h1 {
     font-size: 26px;
     color: #333;
     text-align: center;
@@ -45,7 +45,7 @@
     cursor: pointer;
 }
 
-.coupon-container p {
+.coupon-list-container p {
     text-align: center;
     font-size: 16px;
     color: #666;

@@ -1,19 +1,19 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../../core/auth/services/user.service';
-import { CouponService } from './coupon.service';
+import { UserService } from '../../core/auth/services/user.service';
+import { CouponListService } from './coupon-list.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AuthenticatedDirective } from '../../../core/auth/authenticated.directive';
+import { AuthenticatedDirective } from '../../core/auth/authenticated.directive';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-coupon',
-  templateUrl: './coupon.component.html',
-  styleUrls: ['./coupon.component.css'],
+  selector: 'app-coupon-list',
+  templateUrl: './coupon-list.component.html',
+  styleUrls: ['./coupon-list.component.css'],
   imports: [CommonModule, AuthenticatedDirective],
   standalone: true,
 })
-export default class HomeComponent implements OnInit {
+export default class CouponListComponent implements OnInit {
   isAuthenticated = false;
   coupons: any[] = [];
   destroyRef = inject(DestroyRef);
@@ -21,7 +21,7 @@ export default class HomeComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly userService: UserService,
-    private readonly couponService: CouponService
+    private readonly couponListService: CouponListService
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export default class HomeComponent implements OnInit {
         this.isAuthenticated = isAuthenticated;
       });
 
-    this.couponService.getCoupons().subscribe((response: any) => {
+    this.couponListService.getCoupons().subscribe((response: any) => {
       this.coupons = response.data;
     });
   }
@@ -41,6 +41,6 @@ export default class HomeComponent implements OnInit {
   }
 
   goToDetail(couponId: number): void {
-    // this.router.navigate([`/coupons`, couponId]);
+    this.router.navigate([`/coupons`, couponId]);
   }
 }

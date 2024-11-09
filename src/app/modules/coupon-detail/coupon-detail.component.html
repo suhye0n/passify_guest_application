@@ -1,0 +1,15 @@
+<div class="coupon-detail-container">
+  <h1>쿠폰 상세 정보</h1>
+  <div *ngIf="coupon">
+    <p><strong>이름:</strong> {{ coupon.name }}</p>
+    <p><strong>바코드:</strong></p>
+    <!-- Barcode canvas element -->
+    <svg #barcode></svg>
+    <p><strong>메모:</strong> {{ coupon.memo }}</p>
+    <p><strong>생성일:</strong> {{ coupon.createdAt | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>수정일:</strong> {{ coupon.updatedAt | date: 'yyyy-MM-dd' }}</p>
+  </div>
+  <div *ngIf="!coupon">
+    <p>쿠폰 정보를 불러올 수 없습니다.</p>
+  </div>
+</div>
