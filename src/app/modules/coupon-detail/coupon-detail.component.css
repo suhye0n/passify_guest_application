@@ -1,5 +1,11 @@
-.barcode {
-    margin: 10px 0;
+.edit-coupon-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 30px 0 20px 0;
+}
+
+.edit-coupon-btn i {
+    margin-right: 8px;
 }
 
 p:not(:first-child) {

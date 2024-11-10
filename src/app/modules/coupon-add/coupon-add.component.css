@@ -1,3 +1,50 @@
 button {
     border-radius: 10px;
 }
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #ccc;
+}
+
+button[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+button[type="submit"]:disabled {
+    background-color: #e0e0e0;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+button i {
+    margin-right: 5px;
+}

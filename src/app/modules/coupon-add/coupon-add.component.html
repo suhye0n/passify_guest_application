@@ -3,19 +3,40 @@
   <form (ngSubmit)="onSubmit()" #couponForm="ngForm">
     <div>
       <label for="name">이름</label>
-      <input id="name" type="text" name="name" [(ngModel)]="coupon.name" required />
+      <input 
+        id="name" 
+        type="text" 
+        name="name" 
+        [(ngModel)]="coupon.name" 
+        required 
+        #name="ngModel"
+      />
     </div>
     <div>
       <label for="barcode">바코드</label>
-      <input id="barcode" type="text" name="barcode" [(ngModel)]="coupon.barcode"
-        (ngModelChange)="generateBarcode(coupon.barcode)" required />
-
-      <svg [class.hidden]="!coupon.barcode" #barcode></svg>
+      <input 
+        id="barcode" 
+        type="text" 
+        name="barcode" 
+        [(ngModel)]="coupon.barcode"
+        (ngModelChange)="generateBarcode(coupon.barcode)" 
+        required 
+        #barcode="ngModel"
+      />
+      <svg [class.hidden]="!coupon.barcode" #barcodeSvg></svg>
     </div>
     <div>
       <label for="memo">메모</label>
       <textarea id="memo" name="memo" [(ngModel)]="coupon.memo"></textarea>
     </div>
-    <button type="submit" [disabled]="couponForm.invalid">쿠폰 추가</button>
+
+    <div class="button-group">
+      <button type="button" class="cancel-btn" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> 취소
+      </button>
+      <button type="submit" [disabled]="couponForm.invalid">
+        <i class="fas fa-check"></i> 완료
+      </button>
+    </div>
   </form>
 </div>

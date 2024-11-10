@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import JsBarcode from 'jsbarcode';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-coupon-edit',
@@ -26,7 +27,8 @@ export default class CouponEditComponent implements OnInit {
   constructor(
     private couponEditService: CouponEditService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -70,5 +72,9 @@ export default class CouponEditComponent implements OnInit {
         displayValue: true,
       });
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

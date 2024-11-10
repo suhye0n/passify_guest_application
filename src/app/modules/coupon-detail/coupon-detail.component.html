@@ -1,7 +1,10 @@
 <div class="container">
   <h1>쿠폰 상세 정보</h1>
   <div *ngIf="coupon">
-    <p (click)="goToEditPage()">수정</p>
+    <button class="edit-coupon-btn" (click)="goToEditPage()">
+      <i class="fas fa-edit"></i> 수정
+    </button>
+    
     <p><strong>이름:</strong> {{ coupon.name }}</p>
     <p><strong>바코드:</strong></p>
     <svg #barcode></svg>

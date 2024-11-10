@@ -22,6 +22,7 @@ a {
     color: #4a4a4a;
     text-decoration: none;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 a:hover {
@@ -33,11 +34,11 @@ button,
 a.cta {
     padding: 16px 32px;
     border-radius: 35px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     color: white;
-    background-color: #ff7b8d;
+    background-color: #ff9aa7;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     display: inline-block;
@@ -50,13 +51,6 @@ a.cta:hover {
     background-color: #ff7b8d;
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-button:focus,
-a.cta:focus {
-    outline: none;
-    border: 2px solid #ff7b8d;
-    box-shadow: 0 0 0 4px rgba(255, 75, 102, 0.3);
 }
 
 button:disabled,
@@ -120,13 +114,6 @@ textarea {
     box-sizing: border-box;
     background-color: #fafafa;
     transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-input:focus,
-textarea:focus {
-    border-color: #ff9aa7;
-    background-color: #ffffff;
-    outline: none;
 }
 
 .container {
