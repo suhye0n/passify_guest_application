@@ -8,6 +8,21 @@
         {{ coupon.name }}
       </li>
     </ul>
+    <div class="pagination">
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <ng-container *ngFor="let page of totalPages | slice:(currentPage - 3):(currentPage + 2)">
+        <button [class.active]="page === currentPage" (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </ng-container>
+
+      <button (click)="goToNextPage()" [disabled]="currentPage === totalPages.length">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
   </div>
   <div *ngIf="coupons.length === 0">
     <p>쿠폰이 없습니다.</p>

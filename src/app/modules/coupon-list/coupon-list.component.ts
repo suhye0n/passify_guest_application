@@ -17,6 +17,11 @@ export default class CouponListComponent implements OnInit {
   isAuthenticated = false;
   coupons: any[] = [];
   destroyRef = inject(DestroyRef);
+  offset = 0;
+  limit = 10;
+  count = 0;
+  currentPage = 1;
+  totalPages: number[] = [];
 
   constructor(
     private readonly router: Router,
@@ -31,13 +36,19 @@ export default class CouponListComponent implements OnInit {
         this.isAuthenticated = isAuthenticated;
       });
 
-    this.couponListService.getCoupons().subscribe((response: any) => {
-      this.coupons = response.data;
-    });
+    this.loadCoupons();
   }
 
-  goToSignup(): void {
-    this.router.navigate(['/signup']);
+  loadCoupons(): void {
+    this.couponListService
+      .getCoupons(this.offset, this.limit)
+      .subscribe((response: any) => {
+        this.coupons = response.data;
+        this.count = response.count;
+        this.totalPages = Array(Math.ceil(this.count / this.limit))
+          .fill(0)
+          .map((_, i) => i + 1);
+      });
   }
 
   goToDetail(couponId: number): void {
@@ -46,5 +57,23 @@ export default class CouponListComponent implements OnInit {
 
   goToAddCoupon(): void {
     this.router.navigate(['/coupons/add']);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.offset = (page - 1) * this.limit;
+    this.loadCoupons();
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.goToPage(this.currentPage - 1);
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages.length) {
+      this.goToPage(this.currentPage + 1);
+    }
   }
 }

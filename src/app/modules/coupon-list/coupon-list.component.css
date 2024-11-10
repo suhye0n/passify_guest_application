@@ -55,3 +55,39 @@ p {
     text-align: center;
     margin-top: 20px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 8px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #ff9aa7;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination button.active {
+    background-color: #ff7b8d;
+    font-weight: bold;
+}
+
+.pagination button:hover:not(.active) {
+    background-color: #ff7b8d;
+    transform: scale(1.05);
+}
+
+.pagination button:disabled {
+    background-color: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+}
