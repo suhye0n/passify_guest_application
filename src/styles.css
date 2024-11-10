@@ -87,10 +87,39 @@ svg {
 }
 
 .error-message {
-    color: #e74c3c;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-top: 10px;
+    color: #f44336;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: rgba(244, 67, 54, 0.1);
+    border-radius: 4px;
+    border-left: 4px solid #f44336;
+}
+
+.error-message * {
+    font-size: 9px;
+}
+
+.error-message ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.error-message li {
+    color: #f44336;
+    margin: 0.5rem 0;
+}
+
+.error-message li strong {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #d32f2f;
+}
+
+.error-message li::before {
+    content: '⚠️';
+    margin-right: 8px;
+    color: #f44336;
 }
 
 form {

@@ -12,14 +12,25 @@
         [class.invalid]="authForm.get('password')?.invalid && authForm.get('password')?.touched" />
     </div>
 
-    <!-- 오류 메시지 -->
-    <div class="error-message" *ngIf="errors && errors.detail">
+    <div class="input-group" *ngIf="authType === 'signup'">
+      <input id="passwordConfirmation" type="password" formControlName="passwordConfirmation" placeholder="비밀번호 확인"
+        [class.invalid]="authForm.get('passwordConfirmation')?.invalid && authForm.get('passwordConfirmation')?.touched" />
+      <div *ngIf="authForm.get('passwordConfirmation')?.hasError('passwordMismatch')" class="error-message">
+        <ul>
+          <li>
+            {{ authForm.get('passwordConfirmation')?.getError('passwordMismatch') }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="error-message" *ngIf="errors && errors.detail && errorEntries.length">
       <ul>
         <li *ngFor="let entry of errorEntries">
-          <strong>{{ entry[0] }}:</strong> {{ entry[1] }}
+          {{ entry[1] }}
         </li>
       </ul>
-    </div>
+    </div>    
 
     <button type="submit" [disabled]="isSubmitting || authForm.invalid">
       {{ authType === 'login' ? '로그인' : '회원가입' }}

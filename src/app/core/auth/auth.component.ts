@@ -14,6 +14,7 @@ import { ValidationErrors } from '../models/errors.model';
 interface AuthFormValues {
   email: string;
   password: string;
+  passwordConfirmation: string;
 }
 
 @Component({
@@ -41,18 +42,43 @@ export default class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeAuthType();
+
+    this.authForm
+      .get('password')
+      ?.valueChanges.subscribe(() => this.checkPasswordMatch());
+    this.authForm
+      .get('passwordConfirmation')
+      ?.valueChanges.subscribe(() => this.checkPasswordMatch());
   }
 
   private createAuthForm(): FormGroup {
-    return new FormGroup({
+    const form = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
+      passwordConfirmation: new FormControl('', [Validators.required]),
     });
+
+    return form;
   }
 
   private initializeAuthType(): void {
     this.authType = this.route.snapshot.url.at(-1)?.path || '';
     this.title = this.authType === 'login' ? '로그인' : '회원가입';
+  }
+
+  private checkPasswordMatch(): void {
+    const password = this.authForm.get('password')?.value;
+    const passwordConfirmation = this.authForm.get(
+      'passwordConfirmation'
+    )?.value;
+
+    if (password && passwordConfirmation && password !== passwordConfirmation) {
+      this.authForm
+        .get('passwordConfirmation')
+        ?.setErrors({ passwordMismatch: '비밀번호가 일치하지 않습니다.' });
+    } else {
+      this.authForm.get('passwordConfirmation')?.setErrors(null);
+    }
   }
 
   public onSubmit(): void {
@@ -76,7 +102,18 @@ export default class AuthComponent implements OnInit {
     request$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => this.router.navigate(['/']),
       error: (err) => {
-        this.errors = err;
+        if (err && err.message) {
+          const errorMessages: string[] = err.message
+            .split(', ')
+            .map((msg: string) => msg.trim());
+
+          const errorObj: { [key: string]: string } = {};
+          errorMessages.forEach((msg: string) => {
+            errorObj[msg] = msg;
+          });
+
+          this.errors = { detail: errorObj };
+        }
         this.isSubmitting = false;
       },
     });
