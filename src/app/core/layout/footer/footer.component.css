@@ -9,6 +9,9 @@
     left: 0;
     right: 0;
     z-index: 1000;
+}
+
+.footer p {
     font-size: 9px;
 }
 
