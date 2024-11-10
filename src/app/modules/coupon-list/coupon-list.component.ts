@@ -85,4 +85,11 @@ export default class CouponListComponent implements OnInit {
       this.goToPage(this.currentPage + 1);
     }
   }
+
+  pagesToDisplay(): number[] {
+    const start = Math.floor((this.currentPage - 1) / 5) * 5 + 1;
+    const end = Math.min(start + 4, this.totalPages.length);
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  }
 }

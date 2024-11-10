@@ -33,13 +33,13 @@
       <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">
         <i class="fas fa-chevron-left"></i>
       </button>
-
-      <ng-container *ngFor="let page of totalPages | slice:(currentPage - 3):(currentPage + 2)">
+    
+      <ng-container *ngFor="let page of pagesToDisplay()">
         <button [class.active]="page === currentPage" (click)="goToPage(page)">
           {{ page }}
         </button>
       </ng-container>
-
+    
       <button (click)="goToNextPage()" [disabled]="currentPage === totalPages.length">
         <i class="fas fa-chevron-right"></i>
       </button>
