@@ -91,3 +91,52 @@ p {
     cursor: not-allowed;
     transform: none;
 }
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.search-container select,
+.search-container input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.search-container select {
+    width: 150px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-container input {
+    flex-grow: 1;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-container select:focus,
+.search-container input:focus {
+    border-color: #ff9aa7;
+}
+
+.search-container button {
+    padding: 8px 12px;
+    background-color: #ff9aa7;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-container button:hover {
+    background-color: #ff7b8d;
+    transform: scale(1.05);
+}

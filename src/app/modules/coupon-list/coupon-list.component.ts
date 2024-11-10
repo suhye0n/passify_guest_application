@@ -5,12 +5,13 @@ import { CouponListService } from './coupon-list.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthenticatedDirective } from '../../core/auth/authenticated.directive';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-coupon-list',
   templateUrl: './coupon-list.component.html',
   styleUrls: ['./coupon-list.component.css'],
-  imports: [CommonModule, AuthenticatedDirective],
+  imports: [CommonModule, AuthenticatedDirective, FormsModule],
   standalone: true,
 })
 export default class CouponListComponent implements OnInit {
@@ -22,6 +23,8 @@ export default class CouponListComponent implements OnInit {
   count = 0;
   currentPage = 1;
   totalPages: number[] = [];
+  searchBy: string = 'name'; // 검색 기준
+  searchQuery: string = ''; // 검색어
 
   constructor(
     private readonly router: Router,
@@ -41,7 +44,7 @@ export default class CouponListComponent implements OnInit {
 
   loadCoupons(): void {
     this.couponListService
-      .getCoupons(this.offset, this.limit)
+      .getCoupons(this.offset, this.limit, this.searchBy, this.searchQuery)
       .subscribe((response: any) => {
         this.coupons = response.data;
         this.count = response.count;
@@ -49,6 +52,12 @@ export default class CouponListComponent implements OnInit {
           .fill(0)
           .map((_, i) => i + 1);
       });
+  }
+
+  searchCoupons(): void {
+    this.currentPage = 1;
+    this.offset = 0;
+    this.loadCoupons();
   }
 
   goToDetail(couponId: number): void {

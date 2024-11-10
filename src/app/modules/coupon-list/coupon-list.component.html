@@ -2,12 +2,32 @@
   <button class="add-coupon-btn" (click)="goToAddCoupon()">
     <i class="fas fa-plus"></i> 쿠폰 추가
   </button>
+
+  <div class="search-container">
+    <select [(ngModel)]="searchBy" (change)="searchCoupons()">
+      <option value="name">이름</option>
+      <option value="memo">메모</option>
+    </select>
+
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="검색어 입력"
+    />
+
+    <button (click)="searchCoupons()">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+
   <div *ngIf="coupons.length > 0">
     <ul class="coupon-list">
       <li *ngFor="let coupon of coupons" (click)="goToDetail(coupon.id)">
         {{ coupon.name }}
       </li>
     </ul>
+
+    <!-- 페이지네이션 -->
     <div class="pagination">
       <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">
         <i class="fas fa-chevron-left"></i>
@@ -24,6 +44,7 @@
       </button>
     </div>
   </div>
+
   <div *ngIf="coupons.length === 0">
     <p>쿠폰이 없습니다.</p>
   </div>
