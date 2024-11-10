@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import JsBarcode from 'jsbarcode';
 import { Location } from '@angular/common';
+import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-coupon-add',
   templateUrl: './coupon-add.component.html',
   styleUrls: ['./coupon-add.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LoadingIndicatorComponent],
 })
 export default class CouponAddComponent implements OnInit {
   coupon = {
@@ -20,6 +21,7 @@ export default class CouponAddComponent implements OnInit {
     barcode: '',
     memo: '',
   };
+  isLoading: boolean = false;
 
   @ViewChild('barcode', { static: false }) barcodeElement!: ElementRef;
 
@@ -34,11 +36,14 @@ export default class CouponAddComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this.couponAddService.addCoupon(this.coupon).subscribe(
       (response) => {
+        this.isLoading = false;
         this.router.navigate(['/coupons']);
       },
       (error) => {
+        this.isLoading = false; // 에러 발생 시 로딩 종료
         console.error('쿠폰 추가 실패:', error);
       }
     );

@@ -1,3 +1,5 @@
+<app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+
 <div class="container">
   <div class="auth-header">
     <h1>{{ title }}</h1>
@@ -30,7 +32,7 @@
           {{ entry[1] }}
         </li>
       </ul>
-    </div>    
+    </div>
 
     <button type="submit" [disabled]="isSubmitting || authForm.invalid">
       {{ authType === 'login' ? '로그인' : '회원가입' }}

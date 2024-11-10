@@ -1,28 +1,16 @@
+<app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+
 <div class="container">
   <h1>쿠폰 추가</h1>
   <form (ngSubmit)="onSubmit()" #couponForm="ngForm">
     <div>
       <label for="name">이름</label>
-      <input 
-        id="name" 
-        type="text" 
-        name="name" 
-        [(ngModel)]="coupon.name" 
-        required 
-        #name="ngModel"
-      />
+      <input id="name" type="text" name="name" [(ngModel)]="coupon.name" required #name="ngModel" />
     </div>
     <div>
       <label for="barcode">바코드</label>
-      <input 
-        id="barcode" 
-        type="text" 
-        name="barcode" 
-        [(ngModel)]="coupon.barcode"
-        (ngModelChange)="generateBarcode(coupon.barcode)" 
-        required 
-        #barcode="ngModel"
-      />
+      <input id="barcode" type="text" name="barcode" [(ngModel)]="coupon.barcode"
+        (ngModelChange)="generateBarcode(coupon.barcode)" required #barcode="ngModel" />
       <svg [class.hidden]="!coupon.barcode" #barcodeSvg></svg>
     </div>
     <div>

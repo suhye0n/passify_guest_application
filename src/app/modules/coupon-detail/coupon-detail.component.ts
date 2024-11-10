@@ -10,12 +10,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CouponDetailService } from './coupon-detail.service';
 import JsBarcode from 'jsbarcode';
 import { CommonModule } from '@angular/common';
+import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-coupon-detail',
   templateUrl: './coupon-detail.component.html',
   styleUrls: ['./coupon-detail.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingIndicatorComponent],
   standalone: true,
 })
 export default class CouponDetailComponent implements OnInit, AfterViewInit {
@@ -23,6 +24,7 @@ export default class CouponDetailComponent implements OnInit, AfterViewInit {
 
   @ViewChild('barcode', { static: false }) barcodeElement!: ElementRef;
   private isViewInitialized = false;
+  isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,16 +44,22 @@ export default class CouponDetailComponent implements OnInit, AfterViewInit {
   }
 
   loadCoupon(couponId: number): void {
-    this.couponDetailService
-      .getCouponById(couponId)
-      .subscribe((response: any) => {
+    this.isLoading = true;
+    this.couponDetailService.getCouponById(couponId).subscribe(
+      (response: any) => {
         this.coupon = response.data;
 
         if (this.isViewInitialized && this.coupon?.barcode) {
           this.cdr.detectChanges();
           this.generateBarcode(String(this.coupon.barcode));
         }
-      });
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('쿠폰 불러오기 실패:', error);
+        this.isLoading = false; // 에러 발생 시 로딩 종료
+      }
+    );
   }
 
   generateBarcode(barcodeValue: string): void {

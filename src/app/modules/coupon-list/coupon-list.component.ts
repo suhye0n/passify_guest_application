@@ -6,12 +6,20 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthenticatedDirective } from '../../core/auth/authenticated.directive';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from '../../core/layout/footer/footer.component';
+import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-coupon-list',
   templateUrl: './coupon-list.component.html',
   styleUrls: ['./coupon-list.component.css'],
-  imports: [CommonModule, AuthenticatedDirective, FormsModule],
+  imports: [
+    CommonModule,
+    AuthenticatedDirective,
+    FormsModule,
+    FooterComponent,
+    LoadingIndicatorComponent,
+  ],
   standalone: true,
 })
 export default class CouponListComponent implements OnInit {
@@ -25,6 +33,7 @@ export default class CouponListComponent implements OnInit {
   totalPages: number[] = [];
   searchBy: string = 'name'; // 검색 기준
   searchQuery: string = ''; // 검색어
+  isLoading: boolean = false;
 
   constructor(
     private readonly router: Router,
@@ -43,15 +52,22 @@ export default class CouponListComponent implements OnInit {
   }
 
   loadCoupons(): void {
+    this.isLoading = true;
     this.couponListService
       .getCoupons(this.offset, this.limit, this.searchBy, this.searchQuery)
-      .subscribe((response: any) => {
-        this.coupons = response.data;
-        this.count = response.count;
-        this.totalPages = Array(Math.ceil(this.count / this.limit))
-          .fill(0)
-          .map((_, i) => i + 1);
-      });
+      .subscribe(
+        (response: any) => {
+          this.coupons = response.data;
+          this.count = response.count;
+          this.totalPages = Array(Math.ceil(this.count / this.limit))
+            .fill(0)
+            .map((_, i) => i + 1);
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false; // 에러 발생 시 로딩 종료
+        }
+      );
   }
 
   searchCoupons(): void {

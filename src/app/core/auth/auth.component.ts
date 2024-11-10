@@ -10,6 +10,7 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { UserService } from './services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ValidationErrors } from '../models/errors.model';
+import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
 
 interface AuthFormValues {
   email: string;
@@ -22,7 +23,12 @@ interface AuthFormValues {
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    CommonModule,
+    LoadingIndicatorComponent,
+  ],
 })
 export default class AuthComponent implements OnInit {
   public authType: string = '';
@@ -30,6 +36,7 @@ export default class AuthComponent implements OnInit {
   public isSubmitting: boolean = false;
   public errors: ValidationErrors = { detail: {} };
   public authForm: FormGroup;
+  isLoading: boolean = false;
 
   private readonly destroyRef = inject(DestroyRef);
   private readonly userService = inject(UserService);
@@ -85,6 +92,7 @@ export default class AuthComponent implements OnInit {
     if (this.isSubmitting) return;
 
     this.isSubmitting = true;
+    this.isLoading = true;
     this.errors = { detail: {} };
 
     const formData = this.authForm.value as AuthFormValues;
@@ -100,8 +108,12 @@ export default class AuthComponent implements OnInit {
           });
 
     request$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      },
       error: (err) => {
+        this.isLoading = false; // 에러 발생 시 로딩 종료
         if (err && err.message) {
           const errorMessages: string[] = err.message
             .split(', ')

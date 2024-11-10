@@ -4,12 +4,18 @@ import { AuthenticatedDirective } from '../../auth/authenticated.directive';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LoadingIndicatorComponent } from '../../../shared/loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  imports: [AuthenticatedDirective, AsyncPipe, CommonModule],
+  imports: [
+    AuthenticatedDirective,
+    AsyncPipe,
+    CommonModule,
+    LoadingIndicatorComponent,
+  ],
   standalone: true,
 })
 export class HeaderComponent {
@@ -19,10 +25,12 @@ export class HeaderComponent {
 
   isSidebarActive = false;
   menuClass = 'close';
+  isLoading: boolean = false;
 
   logout(): void {
+    this.isLoading = true;
     this.userService.logout();
-    this.router.navigate(['/login']);
+    this.isLoading = false;
   }
 
   goToSignup(): void {

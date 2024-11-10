@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import JsBarcode from 'jsbarcode';
 import { Location } from '@angular/common';
+import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-coupon-edit',
   templateUrl: './coupon-edit.component.html',
   styleUrls: ['./coupon-edit.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LoadingIndicatorComponent],
 })
 export default class CouponEditComponent implements OnInit {
   coupon = {
@@ -21,6 +22,7 @@ export default class CouponEditComponent implements OnInit {
     memo: '',
   };
   couponId: string = '';
+  isLoading: boolean = false;
 
   @ViewChild('barcode', { static: false }) barcodeElement!: ElementRef;
 
@@ -41,24 +43,30 @@ export default class CouponEditComponent implements OnInit {
   }
 
   getCouponDetails(id: string): void {
+    this.isLoading = true;
     this.couponEditService.getCoupon(id).subscribe(
       (response: any) => {
         this.coupon = response.data;
         this.generateBarcode(this.coupon.barcode);
+        this.isLoading = false;
       },
       (error) => {
         console.error('쿠폰 정보 불러오기 실패:', error);
+        this.isLoading = false; // 에러 발생 시 로딩 종료
       }
     );
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this.couponEditService.updateCoupon(this.coupon).subscribe(
       (response) => {
         this.router.navigate([`/coupons/${this.couponId}`]);
+        this.isLoading = false;
       },
       (error) => {
         console.error('쿠폰 수정 실패:', error);
+        this.isLoading = false; // 에러 발생 시 로딩 종료
       }
     );
   }
