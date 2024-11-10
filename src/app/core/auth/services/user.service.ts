@@ -48,14 +48,7 @@ export class UserService {
   }
 
   logout(): void {
-    this.http
-      .post('/logout', {})
-      .pipe(
-        tap(() => {
-          this.router.navigate(['/login']);
-        })
-      )
-      .subscribe();
+    this.http.post('/logout', {}).subscribe();
     this.purgeAuth();
   }
 
@@ -88,5 +81,6 @@ export class UserService {
     localStorage.clear();
     this.jwtService.destroyToken();
     this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 }
