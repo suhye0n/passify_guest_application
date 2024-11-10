@@ -5,8 +5,11 @@
     font-style: normal;
 }
 
-body {
+* {
     font-family: 'NoonnuBasicGothicRegular';
+}
+
+body {
     margin: 0 0 80px 0;
     padding: 0;
     background-color: #fff3e3;
@@ -138,4 +141,8 @@ textarea:focus {
 
 .container:hover {
     transform: scale(1.02);
+}
+
+.hidden {
+    display: none;
 }
