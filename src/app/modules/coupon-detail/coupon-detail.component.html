@@ -1,5 +1,8 @@
 <app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
 
+<app-error-popup [errorMessage]="errorMessage" (close)="closeErrorPopup()">
+</app-error-popup>
+
 <div class="container">
   <h1>쿠폰 상세 정보</h1>
   <div *ngIf="coupon">

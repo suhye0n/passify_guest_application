@@ -11,17 +11,18 @@ import { CouponDetailService } from './coupon-detail.service';
 import JsBarcode from 'jsbarcode';
 import { CommonModule } from '@angular/common';
 import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
+import { ErrorPopupComponent } from '../../shared/error-popup/error-popup.component';
 
 @Component({
   selector: 'app-coupon-detail',
   templateUrl: './coupon-detail.component.html',
   styleUrls: ['./coupon-detail.component.css'],
-  imports: [CommonModule, LoadingIndicatorComponent],
+  imports: [CommonModule, LoadingIndicatorComponent, ErrorPopupComponent],
   standalone: true,
 })
 export default class CouponDetailComponent implements OnInit, AfterViewInit {
   coupon: any;
-
+  errorMessage: string = '';
   @ViewChild('barcode', { static: false }) barcodeElement!: ElementRef;
   private isViewInitialized = false;
   isLoading: boolean = false;
@@ -58,6 +59,7 @@ export default class CouponDetailComponent implements OnInit, AfterViewInit {
       (error) => {
         console.error('쿠폰 불러오기 실패:', error);
         this.isLoading = false; // 에러 발생 시 로딩 종료
+        this.errorMessage = '쿠폰 불러오기 실패: ' + error.message;
       }
     );
   }
@@ -75,5 +77,9 @@ export default class CouponDetailComponent implements OnInit, AfterViewInit {
 
   goToEditPage(): void {
     this.router.navigate([`/coupons/edit/${this.coupon.id}`]);
+  }
+
+  closeErrorPopup(): void {
+    this.errorMessage = '';
   }
 }

@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../core/layout/footer/footer.component';
 import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
+import { ErrorPopupComponent } from '../../shared/error-popup/error-popup.component';
 
 @Component({
   selector: 'app-coupon-list',
@@ -19,6 +20,7 @@ import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loadin
     FormsModule,
     FooterComponent,
     LoadingIndicatorComponent,
+    ErrorPopupComponent,
   ],
   standalone: true,
 })
@@ -34,6 +36,7 @@ export default class CouponListComponent implements OnInit {
   searchBy: string = 'name'; // 검색 기준
   searchQuery: string = ''; // 검색어
   isLoading: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private readonly router: Router,
@@ -64,8 +67,10 @@ export default class CouponListComponent implements OnInit {
             .map((_, i) => i + 1);
           this.isLoading = false;
         },
-        () => {
+        (error) => {
           this.isLoading = false; // 에러 발생 시 로딩 종료
+          this.errorMessage = '쿠폰 목록 불러오기 실패: ' + error.message;
+          console.error('쿠폰 목록 불러오기 실패:', error);
         }
       );
   }
@@ -107,5 +112,9 @@ export default class CouponListComponent implements OnInit {
     const end = Math.min(start + 4, this.totalPages.length);
 
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  }
+
+  closeErrorPopup(): void {
+    this.errorMessage = '';
   }
 }

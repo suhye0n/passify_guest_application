@@ -6,13 +6,19 @@ import { FormsModule } from '@angular/forms';
 import JsBarcode from 'jsbarcode';
 import { Location } from '@angular/common';
 import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
+import { ErrorPopupComponent } from '../../shared/error-popup/error-popup.component';
 
 @Component({
   selector: 'app-coupon-add',
   templateUrl: './coupon-add.component.html',
   styleUrls: ['./coupon-add.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, LoadingIndicatorComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    LoadingIndicatorComponent,
+    ErrorPopupComponent,
+  ],
 })
 export default class CouponAddComponent implements OnInit {
   coupon = {
@@ -22,6 +28,7 @@ export default class CouponAddComponent implements OnInit {
     memo: '',
   };
   isLoading: boolean = false;
+  errorMessage: string = '';
 
   @ViewChild('barcode', { static: false }) barcodeElement!: ElementRef;
 
@@ -44,7 +51,7 @@ export default class CouponAddComponent implements OnInit {
       },
       (error) => {
         this.isLoading = false; // 에러 발생 시 로딩 종료
-        console.error('쿠폰 추가 실패:', error);
+        this.errorMessage = '쿠폰 추가 실패: ' + error.message;
       }
     );
   }
@@ -62,5 +69,9 @@ export default class CouponAddComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  closeErrorPopup(): void {
+    this.errorMessage = '';
   }
 }

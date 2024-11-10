@@ -6,13 +6,19 @@ import { FormsModule } from '@angular/forms';
 import JsBarcode from 'jsbarcode';
 import { Location } from '@angular/common';
 import { LoadingIndicatorComponent } from '../../shared/loading-indicator/loading-indicator.component';
+import { ErrorPopupComponent } from '../../shared/error-popup/error-popup.component';
 
 @Component({
   selector: 'app-coupon-edit',
   templateUrl: './coupon-edit.component.html',
   styleUrls: ['./coupon-edit.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, LoadingIndicatorComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    LoadingIndicatorComponent,
+    ErrorPopupComponent,
+  ],
 })
 export default class CouponEditComponent implements OnInit {
   coupon = {
@@ -23,6 +29,7 @@ export default class CouponEditComponent implements OnInit {
   };
   couponId: string = '';
   isLoading: boolean = false;
+  errorMessage: string = '';
 
   @ViewChild('barcode', { static: false }) barcodeElement!: ElementRef;
 
@@ -53,6 +60,7 @@ export default class CouponEditComponent implements OnInit {
       (error) => {
         console.error('쿠폰 정보 불러오기 실패:', error);
         this.isLoading = false; // 에러 발생 시 로딩 종료
+        this.errorMessage = '쿠폰 정보를 불러오지 못했습니다.';
       }
     );
   }
@@ -67,6 +75,7 @@ export default class CouponEditComponent implements OnInit {
       (error) => {
         console.error('쿠폰 수정 실패:', error);
         this.isLoading = false; // 에러 발생 시 로딩 종료
+        this.errorMessage = '쿠폰 수정에 실패했습니다.';
       }
     );
   }
@@ -84,5 +93,9 @@ export default class CouponEditComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  closeErrorPopup(): void {
+    this.errorMessage = '';
   }
 }

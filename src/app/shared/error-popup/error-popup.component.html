@@ -1,0 +1,9 @@
+<div class="error-popup" *ngIf="errorMessage">
+    <div class="error-content">
+        <span class="error-close" (click)="closePopup()">
+            <i class="fas fa-times"></i>
+        </span>
+        <h3>오류 발생</h3>
+        <p>{{ errorMessage }}</p>
+    </div>
+</div>
