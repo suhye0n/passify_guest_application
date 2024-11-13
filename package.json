@@ -10,7 +10,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --configuration=production --base-href=/ && ngh --dir=dist/passify/browser"
+    "deploy": "ng build --configuration=production --base-href=/passify_guest_application/ && ngh --dir=dist/passify/browser"
   },
   "private": true,
   "dependencies": {
