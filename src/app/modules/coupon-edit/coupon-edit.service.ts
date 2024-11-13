@@ -9,10 +9,10 @@ export class CouponEditService {
   constructor(private http: HttpClient) {}
 
   getCoupon(id: string): Observable<any> {
-    return this.http.get(`/coupons/${id}`);
+    return this.http.get(`/passes/${id}`);
   }
 
   updateCoupon(coupon: any): Observable<any> {
-    return this.http.put(`/coupons/${coupon.id}`, coupon);
+    return this.http.put(`/passes/${coupon.id}`, coupon);
   }
 }

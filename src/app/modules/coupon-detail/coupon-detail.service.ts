@@ -9,6 +9,6 @@ export class CouponDetailService {
   constructor(private http: HttpClient) {}
 
   getCouponById(id: number): Observable<any> {
-    return this.http.get(`/coupons/${id}`);
+    return this.http.get(`/passes/${id}`);
   }
 }

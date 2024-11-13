@@ -9,6 +9,6 @@ export class CouponAddService {
   constructor(private http: HttpClient) {}
 
   addCoupon(coupon: any): Observable<any> {
-    return this.http.post('/coupons', coupon);
+    return this.http.post('/passes', coupon);
   }
 }

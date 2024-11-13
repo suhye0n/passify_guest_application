@@ -22,6 +22,6 @@ export class CouponListService {
       params = params.set(searchBy, searchQuery);
     }
 
-    return this.http.get('/coupons', { params });
+    return this.http.get('/passes', { params });
   }
 }

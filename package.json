@@ -1,8 +1,8 @@
 {
-  "name": "pointify",
+  "name": "passify",
   "version": "0.0.0",
   "author": "suhye0n",
-  "description": "Pointify Guest Service",
+  "description": "Passify Guest Service",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --configuration=production --base-href=/ && ngh --dir=dist/pointify/browser"
+    "deploy": "ng build --configuration=production --base-href=/ && ngh --dir=dist/passify/browser"
   },
   "private": true,
   "dependencies": {

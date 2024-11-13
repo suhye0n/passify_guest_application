@@ -2,11 +2,15 @@
 
 <header class="header">
   <div class="logo">
-    <a (click)="goToHome()" class="title">Pointify</a>
+    <a (click)="goToHome()" class="title">Passify</a>
   </div>
 
   <!-- 메뉴 버튼 -->
-  <div class="menu-toggle" (click)="toggleSidebar()" [ngClass]="{'open': menuClass === 'open'}">
+  <div
+    class="menu-toggle"
+    (click)="toggleSidebar()"
+    [ngClass]="{ open: menuClass === 'open' }"
+  >
     <div></div>
     <div></div>
     <div></div>
@@ -14,7 +18,7 @@
 </header>
 
 <!-- 사이드바 -->
-<div class="sidebar" [ngClass]="{ 'active': isSidebarActive }">
+<div class="sidebar" [ngClass]="{ active: isSidebarActive }">
   <ul>
     <li><a (click)="goToHome()">홈</a></li>
 

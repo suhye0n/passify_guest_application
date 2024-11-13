@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
 export const apiInterceptor: HttpInterceptorFn = (request, next) => {
   const userService = inject(UserService);
   const modifiedRequest = request.clone({
-    url: `https://port-0-pointify-server-manager-m3833mtrd38e546a.sel4.cloudtype.app${request.url}`,
+    url: `https://port-0-passify-server-manager-m3833mtrd38e546a.sel4.cloudtype.app${request.url}`,
   });
 
   return next(modifiedRequest).pipe(
