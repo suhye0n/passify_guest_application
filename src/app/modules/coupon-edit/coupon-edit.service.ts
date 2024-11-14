@@ -15,4 +15,12 @@ export class CouponEditService {
   updateCoupon(coupon: any): Observable<any> {
     return this.http.put(`/passes/${coupon.id}`, coupon);
   }
+
+  getTags(): Observable<any> {
+    return this.http.get('/tags');
+  }
+
+  getTitles(): Observable<any> {
+    return this.http.get('/titles');
+  }
 }

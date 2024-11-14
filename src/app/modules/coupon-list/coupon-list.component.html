@@ -29,7 +29,7 @@
   <div *ngIf="coupons.length > 0">
     <ul class="coupon-list">
       <li *ngFor="let coupon of coupons" (click)="goToDetail(coupon.id)">
-        {{ coupon.name }}
+        {{ coupon.title?.name }}
       </li>
     </ul>
 

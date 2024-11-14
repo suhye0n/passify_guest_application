@@ -23,14 +23,18 @@ import { ErrorPopupComponent } from '../../shared/error-popup/error-popup.compon
 export default class CouponAddComponent implements OnInit {
   coupon = {
     userId: 0,
-    name: '',
+    titleId: null,
+    tagId: null,
     barcode: '',
     memo: '',
+    type: 'COUPON',
   };
   isLoading: boolean = false;
   errorMessage: string = '';
+  titles: any[] = [];
+  tags: any[] = [];
 
-  @ViewChild('barcode', { static: false }) barcodeElement!: ElementRef;
+  @ViewChild('barcodeSvg', { static: false }) barcodeSvgElement!: ElementRef;
 
   constructor(
     private couponAddService: CouponAddService,
@@ -40,25 +44,55 @@ export default class CouponAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.coupon.userId = Number(localStorage.getItem('userId'));
+    this.fetchTitles();
+    this.fetchTags();
+  }
+
+  fetchTitles(): void {
+    this.couponAddService.getTitles().subscribe(
+      (response) => {
+        this.titles = response.data;
+        if (this.titles.length > 0) {
+          this.coupon.titleId = this.titles[0].id;
+        }
+      },
+      (error) => {
+        this.errorMessage = '쿠폰명 정보를 불러오지 못했습니다.';
+        console.log(error);
+      }
+    );
+  }
+
+  fetchTags(): void {
+    this.couponAddService.getTags().subscribe(
+      (response) => {
+        this.tags = response.data;
+      },
+      (error) => {
+        this.errorMessage = '태그 정보를 불러오지 못했습니다.';
+        console.log(error);
+      }
+    );
   }
 
   onSubmit(): void {
     this.isLoading = true;
+
     this.couponAddService.addCoupon(this.coupon).subscribe(
       (response) => {
         this.isLoading = false;
         this.router.navigate(['/coupons']);
       },
       (error) => {
-        this.isLoading = false; // 에러 발생 시 로딩 종료
+        this.isLoading = false;
         this.errorMessage = '쿠폰 추가 실패: ' + error.message;
       }
     );
   }
 
   generateBarcode(barcodeValue: string): void {
-    if (this.barcodeElement?.nativeElement && barcodeValue) {
-      JsBarcode(this.barcodeElement.nativeElement, barcodeValue, {
+    if (barcodeValue && this.barcodeSvgElement?.nativeElement) {
+      JsBarcode(this.barcodeSvgElement.nativeElement, barcodeValue, {
         format: 'CODE128',
         width: 2,
         height: 50,

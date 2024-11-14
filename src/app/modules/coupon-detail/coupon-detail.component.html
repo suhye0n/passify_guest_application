@@ -10,8 +10,8 @@
       <i class="fas fa-edit"></i> 수정
     </button>
 
-    <p><strong>이름:</strong> {{ coupon.name }}</p>
-    <p><strong>바코드:</strong></p>
+    <h3>{{ coupon.title?.name }}</h3>
+    <p></p>
     <svg #barcode></svg>
     <p><strong>메모:</strong> {{ coupon.memo }}</p>
     <p><strong>생성일:</strong> {{ coupon.createdAt | date: 'yyyy-MM-dd' }}</p>

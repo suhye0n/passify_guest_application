@@ -7,25 +7,38 @@
   <h1>쿠폰 추가</h1>
   <form (ngSubmit)="onSubmit()" #couponForm="ngForm">
     <div>
-      <label for="name">이름</label>
-      <input id="name" type="text" name="name" [(ngModel)]="coupon.name" required #name="ngModel" />
+      <label for="title">쿠폰명</label>
+      <select id="title" [(ngModel)]="coupon.titleId" name="titleId" required>
+        <option *ngIf="!titles?.length" value="" disabled>쿠폰명이 없습니다.</option>
+        <option *ngFor="let title of titles || []" [value]="title.id">{{ title.name }}</option>
+      </select>
     </div>
+
     <div>
       <label for="barcode">바코드</label>
       <input id="barcode" type="text" name="barcode" [(ngModel)]="coupon.barcode"
         (ngModelChange)="generateBarcode(coupon.barcode)" required #barcode="ngModel" />
       <svg [class.hidden]="!coupon.barcode" #barcodeSvg></svg>
     </div>
+
     <div>
       <label for="memo">메모</label>
       <textarea id="memo" name="memo" [(ngModel)]="coupon.memo"></textarea>
+    </div>
+    
+    <div>
+      <label for="tag">태그</label>
+      <select id="tag" [(ngModel)]="coupon.tagId" name="tagId">
+        <option [value]="null">--- 선택 ---</option>
+        <option *ngFor="let tag of tags || []" [value]="tag.id">{{ tag.name }}</option>
+      </select>
     </div>
 
     <div class="button-group">
       <button type="button" class="cancel-btn" (click)="goBack()">
         <i class="fas fa-arrow-left"></i> 취소
       </button>
-      <button type="submit">
+      <button type="submit" [disabled]="couponForm.invalid">
         <i class="fas fa-check"></i> 완료
       </button>
     </div>
