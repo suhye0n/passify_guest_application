@@ -16,7 +16,8 @@ export class CouponListService {
   ): Observable<any> {
     let params = new HttpParams()
       .set('offset', offset.toString())
-      .set('limit', limit.toString());
+      .set('limit', limit.toString())
+      .set('type', 'COUPON');
 
     if (searchQuery) {
       params = params.set(searchBy, searchQuery);
