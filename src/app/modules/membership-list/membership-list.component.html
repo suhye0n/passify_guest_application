@@ -1,0 +1,57 @@
+<app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+
+<app-error-popup [errorMessage]="errorMessage" (close)="closeErrorPopup()">
+</app-error-popup>
+
+<div class="container">
+  <h1>멤버십 리스트</h1>
+  <button class="add-membership-btn" (click)="goToAddMembership()">
+    <i class="fas fa-plus"></i> 추가
+  </button>
+
+  <div class="search-container">
+    <select [(ngModel)]="searchBy" (change)="searchMemberships()">
+      <option value="name">이름</option>
+      <option value="memo">메모</option>
+    </select>
+
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="검색어 입력"
+    />
+
+    <button (click)="searchMemberships()">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+
+  <div *ngIf="memberships.length > 0">
+    <ul class="membership-list">
+      <li *ngFor="let membership of memberships" (click)="goToDetail(membership.id)">
+        {{ membership.title?.name }}
+      </li>
+    </ul>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    
+      <ng-container *ngFor="let page of pagesToDisplay()">
+        <button [class.active]="page === currentPage" (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </ng-container>
+    
+      <button (click)="goToNextPage()" [disabled]="currentPage === totalPages.length">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="memberships.length === 0">
+    <p>멤버십이 없습니다.</p>
+  </div>
+</div>

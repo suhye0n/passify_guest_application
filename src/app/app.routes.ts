@@ -76,4 +76,24 @@ export const routes: Routes = [
     path: 'points',
     loadComponent: () => import('./modules/point-list/point-list.component'),
   },
+  {
+    path: 'memberships/edit/:id',
+    loadComponent: () =>
+      import('./modules/membership-edit/membership-edit.component'),
+  },
+  {
+    path: 'memberships/add',
+    loadComponent: () =>
+      import('./modules/membership-add/membership-add.component'),
+  },
+  {
+    path: 'memberships/:id',
+    loadComponent: () =>
+      import('./modules/membership-detail/membership-detail.component'),
+  },
+  {
+    path: 'memberships',
+    loadComponent: () =>
+      import('./modules/membership-list/membership-list.component'),
+  },
 ];

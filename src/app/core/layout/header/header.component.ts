@@ -53,6 +53,10 @@ export class HeaderComponent {
     this.router.navigate(['/points']);
   }
 
+  goToMembership(): void {
+    this.router.navigate(['/memberships']);
+  }
+
   goToHome(): void {
     this.router.navigate(['/']);
   }
