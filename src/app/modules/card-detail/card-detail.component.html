@@ -1,0 +1,23 @@
+<app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+
+<app-error-popup [errorMessage]="errorMessage" (close)="closeErrorPopup()">
+</app-error-popup>
+
+<div class="container">
+  <h1>카드 상세 정보</h1>
+  <div *ngIf="card">
+    <button class="edit-card-btn" (click)="goToEditPage()">
+      <i class="fas fa-edit"></i> 수정
+    </button>
+
+    <h3>{{ card.title?.name }}</h3>
+    <p></p>
+    <svg #barcode></svg>
+    <p><strong>메모:</strong> {{ card.memo }}</p>
+    <p><strong>생성일:</strong> {{ card.createdAt | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>수정일:</strong> {{ card.updatedAt | date: 'yyyy-MM-dd' }}</p>
+  </div>
+  <div *ngIf="!card">
+    <p>카드 정보를 불러올 수 없습니다.</p>
+  </div>
+</div>

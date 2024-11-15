@@ -1,0 +1,45 @@
+<app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+
+<app-error-popup [errorMessage]="errorMessage" (close)="closeErrorPopup()"></app-error-popup>
+
+<div class="container">
+  <h1>카드 수정</h1>
+  <form (ngSubmit)="onSubmit()" #cardForm="ngForm">
+    <div>
+      <label for="title">카드명</label>
+      <select id="title" [(ngModel)]="card.titleId" name="titleId" required>
+        <option *ngIf="!titles?.length" value="" disabled>카드명이 없습니다.</option>
+        <option *ngFor="let title of titles || []" [value]="title.id">{{ title.name }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="barcode">바코드</label>
+      <input id="barcode" type="text" name="barcode" [(ngModel)]="card.barcode"
+        (ngModelChange)="generateBarcode(card.barcode)" required />
+      <svg [class.hidden]="!card.barcode" #barcode></svg>
+    </div>
+
+    <div>
+      <label for="memo">메모</label>
+      <textarea id="memo" name="memo" [(ngModel)]="card.memo"></textarea>
+    </div>
+    
+    <div>
+      <label for="tag">태그</label>
+      <select id="tag" [(ngModel)]="card.tagId" name="tagId">
+        <option [value]="null">--- 선택 ---</option>
+        <option *ngFor="let tag of tags || []" [value]="tag.id">{{ tag.name }}</option>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="cancel-btn" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> 취소
+      </button>
+      <button type="submit" [disabled]="cardForm.invalid">
+        <i class="fas fa-check"></i> 완료
+      </button>
+    </div>
+  </form>
+</div>

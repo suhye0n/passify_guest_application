@@ -39,4 +39,20 @@ export const routes: Routes = [
     path: 'coupons',
     loadComponent: () => import('./modules/coupon-list/coupon-list.component'),
   },
+  {
+    path: 'cards/edit/:id',
+    loadComponent: () => import('./modules/card-edit/card-edit.component'),
+  },
+  {
+    path: 'cards/add',
+    loadComponent: () => import('./modules/card-add/card-add.component'),
+  },
+  {
+    path: 'cards/:id',
+    loadComponent: () => import('./modules/card-detail/card-detail.component'),
+  },
+  {
+    path: 'cards',
+    loadComponent: () => import('./modules/card-list/card-list.component'),
+  },
 ];
