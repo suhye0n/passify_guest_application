@@ -49,6 +49,10 @@ export class HeaderComponent {
     this.router.navigate(['/cards']);
   }
 
+  goToPoint(): void {
+    this.router.navigate(['/points']);
+  }
+
   goToHome(): void {
     this.router.navigate(['/']);
   }

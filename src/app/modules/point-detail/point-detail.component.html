@@ -1,0 +1,23 @@
+<app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+
+<app-error-popup [errorMessage]="errorMessage" (close)="closeErrorPopup()">
+</app-error-popup>
+
+<div class="container">
+  <h1>포인트 상세 정보</h1>
+  <div *ngIf="point">
+    <button class="edit-point-btn" (click)="goToEditPage()">
+      <i class="fas fa-edit"></i> 수정
+    </button>
+
+    <h3>{{ point.title?.name }}</h3>
+    <p></p>
+    <svg #barcode></svg>
+    <p><strong>메모:</strong> {{ point.memo }}</p>
+    <p><strong>생성일:</strong> {{ point.createdAt | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>수정일:</strong> {{ point.updatedAt | date: 'yyyy-MM-dd' }}</p>
+  </div>
+  <div *ngIf="!point">
+    <p>포인트 정보를 불러올 수 없습니다.</p>
+  </div>
+</div>

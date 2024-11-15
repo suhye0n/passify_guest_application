@@ -1,0 +1,46 @@
+<app-loading-indicator [isLoading]="isLoading"></app-loading-indicator>
+
+<app-error-popup [errorMessage]="errorMessage" (close)="closeErrorPopup()">
+</app-error-popup>
+
+<div class="container">
+  <h1>포인트 추가</h1>
+  <form (ngSubmit)="onSubmit()" #pointForm="ngForm">
+    <div>
+      <label for="title">포인트명</label>
+      <select id="title" [(ngModel)]="point.titleId" name="titleId" required>
+        <option *ngIf="!titles?.length" value="" disabled>포인트명이 없습니다.</option>
+        <option *ngFor="let title of titles || []" [value]="title.id">{{ title.name }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="barcode">바코드</label>
+      <input id="barcode" type="text" name="barcode" [(ngModel)]="point.barcode"
+        (ngModelChange)="generateBarcode(point.barcode)" required #barcode="ngModel" />
+      <svg [class.hidden]="!point.barcode" #barcodeSvg></svg>
+    </div>
+
+    <div>
+      <label for="memo">메모</label>
+      <textarea id="memo" name="memo" [(ngModel)]="point.memo"></textarea>
+    </div>
+    
+    <div>
+      <label for="tag">태그</label>
+      <select id="tag" [(ngModel)]="point.tagId" name="tagId">
+        <option [value]="null">--- 선택 ---</option>
+        <option *ngFor="let tag of tags || []" [value]="tag.id">{{ tag.name }}</option>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="cancel-btn" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> 취소
+      </button>
+      <button type="submit" [disabled]="pointForm.invalid">
+        <i class="fas fa-check"></i> 완료
+      </button>
+    </div>
+  </form>
+</div>

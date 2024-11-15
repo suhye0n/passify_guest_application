@@ -55,4 +55,25 @@ export const routes: Routes = [
     path: 'cards',
     loadComponent: () => import('./modules/card-list/card-list.component'),
   },
+  {
+    path: 'coupons',
+    loadComponent: () => import('./modules/coupon-list/coupon-list.component'),
+  },
+  {
+    path: 'points/edit/:id',
+    loadComponent: () => import('./modules/point-edit/point-edit.component'),
+  },
+  {
+    path: 'points/add',
+    loadComponent: () => import('./modules/point-add/point-add.component'),
+  },
+  {
+    path: 'points/:id',
+    loadComponent: () =>
+      import('./modules/point-detail/point-detail.component'),
+  },
+  {
+    path: 'points',
+    loadComponent: () => import('./modules/point-list/point-list.component'),
+  },
 ];
